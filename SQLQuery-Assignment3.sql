@@ -24,7 +24,9 @@ INSERT INTO department (dept_name) VALUES
 ('Developer'),
 ('Management'),
 ('Business'),
-('Hospital');
+('Hospital'),
+('Production');
+
 
 INSERT INTO employee (dept_id, mngr_id, emp_name,salary) VALUES
 (1, 21, 'Mahesh', 31000),
@@ -61,12 +63,13 @@ INSERT INTO employee (dept_id, mngr_id, emp_name,salary) VALUES
 (8, 52, 'vnay', 39000);
 
 /*1. write a SQL query to find Employees who have the biggest salary in their Department*/
-SELECT emp_name,salary 
-FROM employee 
-WHERE salary 
-IN (SELECT MAX(salary) 
-FROM employee 
-GROUP BY dept_id);
+SELECT dept_id,emp_name,salary 
+FROM employee
+where dept_id+''+salary 
+IN(SELECT dept_id+''+max(salary)
+FROM employee
+GROUP BY dept_id)
+
 
 /*2. write a SQL query to find Departments that have less than 3 people in it*/
 SELECT dept_name, count(d.dept_id)
@@ -93,3 +96,6 @@ GROUP BY d.dept_name
 SELECT * FROM employee
 
 SELECT * FROM department
+
+select sysdatetimeoffset()
+select GETUTCDATE()
